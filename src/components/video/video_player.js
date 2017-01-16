@@ -41,10 +41,18 @@ class VideoPlayer extends Component {
    * references: 
    *   https://gist.github.com/dhinus/909b1530d2b30681edf7
    *   http://www.useragentstring.com/pages/useragentstring.php
+   *   https://get.webgl.org/
    *
    */
   is360VideoSupported() {
+    // Must not be a mobile device
     if (MobilUtil.isMobileOrTablet()) {
+      return false;
+    }
+
+    // WebGL must be available
+    let canvas = document.createElement("canvas");
+    if (!canvas.getContext("webgl")) {
       return false;
     }
 
